@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -36,6 +37,7 @@ public class VacancyService {
     public List<Vacancy> download(int pageCounter) {
         String jsonStr = null;
         List<Vacancy> vacancies = new ArrayList<>();
+
         try {
             for (int i = 1; i <= pageCounter; i++) {
 
@@ -50,13 +52,17 @@ public class VacancyService {
                 jsonStr = sb.toString();
 
             }
-            if (jsonStr != null) jsonStr = jsonStr.replace("created_at", "created");
 
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
-            ObjectMapper mapper = new ObjectMapper();
-            List<Vacancy> vacancyList = mapper.readValue(jsonArray.toString(), new TypeReference<>() {
-            });
+            List<Vacancy> vacancyList = new ArrayList<>();
+            if (jsonStr != null) {
+                jsonStr = jsonStr.replace("created_at", "created");
+
+                JSONObject jsonObject = new JSONObject(jsonStr);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                ObjectMapper mapper = new ObjectMapper();
+                vacancyList = mapper.readValue(jsonArray.toString(), new TypeReference<>() {
+                });
+            }
             vacancies = vacancyRepository.saveAll(vacancyList);
             log.debug("download");
         } catch (Exception e) {

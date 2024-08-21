@@ -3,6 +3,7 @@ package com.lysenko.testtaskapi.controller;
 import com.lysenko.testtaskapi.model.Vacancy;
 import com.lysenko.testtaskapi.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
