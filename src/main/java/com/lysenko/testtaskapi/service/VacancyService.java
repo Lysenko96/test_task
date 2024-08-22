@@ -55,7 +55,9 @@ public class VacancyService {
 
             List<Vacancy> vacancyList = new ArrayList<>();
             if (jsonStr != null) {
-                jsonStr = jsonStr.replace("created_at", "created");
+                jsonStr = jsonStr.replace("created_at", "createdAt");
+                jsonStr = jsonStr.replace("company_name", "companyName");
+                jsonStr = jsonStr.replace("job_types", "jobTypes");
 
                 JSONObject jsonObject = new JSONObject(jsonStr);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -68,21 +70,24 @@ public class VacancyService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return vacancies;
     }
 
     public Page<Vacancy> search(int page, int size) {
 //        List<Vacancy> result = vacancyRepo.findVacanciesLimitByCreatedAtDesc();
 //        Page<Vacancy> finalResult = new PageImpl<>(result);
-        Sort sort = Sort.by(Sort.Direction.DESC, "created");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
         Page<Vacancy> result = vacancyRepository.findAll(PageRequest.of(page, size, sort));
         log.debug("search");
+
         return result;
     }
 
     public List<String> getStatistics() {
         List<String> result = vacancyRepository.findCounterByLocation();
         log.debug("getStatistics");
+
         return result;
     }
 }

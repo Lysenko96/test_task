@@ -26,6 +26,7 @@ public class VacancyController {
     @GetMapping(value = "/download", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Vacancy>> download(@RequestParam(defaultValue = "5") int pageCounter) {
         List<Vacancy> vacancies = vacancyService.download(pageCounter);
+
         return ResponseEntity.status(HttpStatus.OK).body(vacancies);
     }
 
@@ -33,12 +34,14 @@ public class VacancyController {
     public ResponseEntity<Page<Vacancy>> getVacancies(@RequestParam(defaultValue = "1") int page,
                                                       @RequestParam(defaultValue = "10") int size) {
         Page<Vacancy> vacancies = vacancyService.search(page, size);
+
         return ResponseEntity.status(HttpStatus.OK).body(vacancies);
     }
 
     @GetMapping(value = "/statistic", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> findStatistic() {
         List<String> statistics = vacancyService.getStatistics();
+
         return ResponseEntity.status(HttpStatus.OK).body(statistics);
     }
 }

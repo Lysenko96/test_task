@@ -18,7 +18,7 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String slug;
-    private String company_name;
+    private String companyName;
     private String title;
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -27,20 +27,20 @@ public class Vacancy {
     @ElementCollection
     private List<String> tags;
     @ElementCollection
-    private List<String> job_types;
+    private List<String> jobTypes;
     private String location;
-    private Date created;
+    private Date createdAt;
 
-    public Vacancy(String slug, String company_name, String title, String description, boolean remote, String url, List<String> tags, List<String> job_types, String location, Date created) {
+    public Vacancy(String slug, String companyName, String title, String description, boolean remote, String url, List<String> tags, List<String> jobTypes, String location, Date createdAt) {
         this.slug = slug;
-        this.company_name = company_name;
+        this.companyName = companyName;
         this.title = title;
         this.description = description;
         this.remote = remote;
         this.url = url;
         this.tags = tags;
-        this.job_types = job_types;
+        this.jobTypes = jobTypes;
         this.location = location;
-        this.created = created;
+        this.createdAt = createdAt;
     }
 }
