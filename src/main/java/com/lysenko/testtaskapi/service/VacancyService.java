@@ -27,7 +27,7 @@ import static org.springframework.data.web.config.EnableSpringDataWebSupport.Pag
 
 @Service
 @RequiredArgsConstructor
-@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
+//@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 @Transactional
 @Slf4j
 public class VacancyService {
