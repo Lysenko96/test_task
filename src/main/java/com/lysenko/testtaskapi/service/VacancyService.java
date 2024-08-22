@@ -72,7 +72,7 @@ public class VacancyService {
     }
 
     public Page<Vacancy> search(int page, int size) {
-//        List<Vacancy> result = vacancyRepo.find10ByCreatedAtDesc();
+//        List<Vacancy> result = vacancyRepo.findVacanciesLimitByCreatedAtDesc();
 //        Page<Vacancy> finalResult = new PageImpl<>(result);
         Sort sort = Sort.by(Sort.Direction.DESC, "created");
         Page<Vacancy> result = vacancyRepository.findAll(PageRequest.of(page, size, sort));
