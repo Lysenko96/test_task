@@ -2,6 +2,8 @@ package com.lysenko.testtaskapi.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.lysenko.testtaskapi.model.Vacancy;
 import com.lysenko.testtaskapi.repository.VacancyRepository;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +57,6 @@ public class VacancyService {
 
             List<Vacancy> vacancyList = new ArrayList<>();
             if (jsonStr != null) {
-                jsonStr = jsonStr.replace("created_at", "createdAt");
-                jsonStr = jsonStr.replace("company_name", "companyName");
-                jsonStr = jsonStr.replace("job_types", "jobTypes");
-
                 JSONObject jsonObject = new JSONObject(jsonStr);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                 ObjectMapper mapper = new ObjectMapper();
